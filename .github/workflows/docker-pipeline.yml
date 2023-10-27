@@ -38,15 +38,15 @@ jobs:
         mkdir -p results
 
         # Generate a filename with the Docker image name and a timestamp
-        filename="results/redhat_ubi8_$(date +'%Y%m%d%H%M%S').txt"
+        filename="redhat_ubi8_$(date +'%Y%m%d%H%M%S').txt"
 
         # Save the Anchore scan results to the generated filename
-        cp ${{ steps.scan.outputs.sarif }} $filename
+        mv ${{ steps.scan.outputs.sarif }} results/$filename
 
         # Commit the results to the Git repository
         git config --global user.email "actions@github.com"
         git config --global user.name "GitHub Actions"
-        git add $filename
+        git add results/$filename
         git commit -m "Add Anchore scan results for redhat/ubi8"
         git push
 

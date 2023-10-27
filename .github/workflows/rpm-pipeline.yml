@@ -39,7 +39,7 @@ jobs:
         image: redhat/ubi8
         severity-cutoff: critical
         fail-build: false
-        
+        output-format: table
     
     - name: Stop and remove the Docker container
       run: docker stop my-ubi8-container && docker rm my-ubi8-container

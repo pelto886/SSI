@@ -24,17 +24,17 @@ jobs:
     - name: Pull Red Hat Docker Image
       run: docker pull docker.io/redhat/ubi8
 
-    - name: Run a Docker container
-      run: docker run -i docker.io/redhat/ubi8 /bin/bash
+    - name: Run a Docker container in detached mode
+      run: docker run -d --name my-ubi8-container docker.io/redhat/ubi8 sleep infinity
     
     - name: Install yum (inside the container)
-      run: dnf install -y yum
+      run: docker exec my-ubi8-container dnf install -y yum
       
     - name: Install wget (inside the container)
-      run: yum install -y wget
+      run: docker exec my-ubi8-container yum install -y wget
 
     - name: Download RPM package
-      run: wget -O /tmp/package.rpm "http://repo.okay.com.mx/centos/8/x86_64/release/wget-1.19.5-7.el8.1.x86_64.rpm"
+      run: docker exec my-ubi8-container wget -O /tmp/package.rpm "http://repo.okay.com.mx/centos/8/x86_64/release/wget-1.19.5-7.el8.1.x86_64.rpm"
 
     - name: Exit the Docker container
       run: exit

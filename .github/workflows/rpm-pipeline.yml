@@ -25,7 +25,7 @@ jobs:
       run: docker pull docker.io/redhat/ubi8
 
     - name: Run a Docker container
-      run: docker run -it docker.io/redhat/ubi8 /bin/bash
+      run: docker run -i docker.io/redhat/ubi8 /bin/bash
 
     - name: Install wget (inside the container)
       run: yum install -y wget

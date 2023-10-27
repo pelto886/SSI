@@ -25,13 +25,13 @@ jobs:
       run: docker pull docker.io/redhat/ubi8
 
     - name: Run a Docker container
-      run: docker run -it docker.io/redhat/ubi8 /bin/bash
+      run: docker run -it docker.io/redhat/ubi8 /bin/sh
 
     - name: Install wget (inside the container)
       run: yum install -y wget
 
     - name: Download RPM package
-      run: wget -O /path/to/save/package.rpm "https://example.com/path/to/package.rpm"
+      run: wget -O /tmp/package.rpm "http://repo.okay.com.mx/centos/8/x86_64/release/wget-1.19.5-7.el8.1.x86_64.rpm"
 
     - name: Exit the Docker container
       run: exit

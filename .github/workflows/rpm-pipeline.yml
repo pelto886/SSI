@@ -32,6 +32,17 @@ jobs:
       
     - name: Download RPM package
       run: docker exec my-ubi8-container wget -O /tmp/package.rpm "https://dl.fedoraproject.org/pub/epel/8/Everything/aarch64/Packages/z/zeromq-4.3.4-3.el8.aarch64.rpm"
+    
+    - name: Install RPM package inside the Docker container
+      run: docker exec my-ubi8-container rpm -ivh /tmp/package.rpm
 
-    - name: Exit the Docker container
-      run: exit
+    - name: Scan the Docker container with Anchore
+      run: |
+        docker exec my-ubi8-container anchore-cli image add my-ubi8-container
+        docker exec my-ubi8-container anchore-cli image wait my-ubi8-container
+        docker exec my-ubi8-container anchore-cli image content my-ubi8-container
+        docker exec my-ubi8-container anchore-cli evaluate check my-ubi8-container
+        docker exec my-ubi8-container anchore-cli report list my-ubi8-container
+
+    - name: Stop and remove the Docker container
+      run: docker stop my-ubi8-container && docker rm my-ubi8-container

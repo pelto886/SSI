@@ -36,7 +36,7 @@ jobs:
     - name: Scan image
       uses: anchore/scan-action@v3
       with:
-        image: my-ubi8-container
+        image: redhat/ubi8
     
     - name: Stop and remove the Docker container
       run: docker stop my-ubi8-container && docker rm my-ubi8-container

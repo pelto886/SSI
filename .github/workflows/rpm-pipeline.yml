@@ -28,13 +28,10 @@ jobs:
       run: docker run -d --name my-ubi8-container docker.io/redhat/ubi8 sleep infinity
     
     - name: Install yum (inside the container)
-      run: docker exec my-ubi8-container dnf install -y yum
+      run: docker exec my-ubi8-container dnf install -y wget
       
-    - name: Install wget (inside the container)
-      run: docker exec my-ubi8-container yum install -y wget
-
     - name: Download RPM package
-      run: docker exec my-ubi8-container wget -O /tmp/package.rpm "http://repo.okay.com.mx/centos/8/x86_64/release/wget-1.19.5-7.el8.1.x86_64.rpm"
+      run: docker exec my-ubi8-container wget -O /tmp/package.rpm "https://dl.fedoraproject.org/pub/epel/8/Everything/aarch64/Packages/z/zeromq-4.3.4-3.el8.aarch64.rpm"
 
     - name: Exit the Docker container
       run: exit

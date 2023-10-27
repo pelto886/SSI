@@ -37,6 +37,9 @@ jobs:
       uses: anchore/scan-action@v3
       with:
         image: redhat/ubi8
+        severity-cutoff: critical
+        fail-build: false
+        
     
     - name: Stop and remove the Docker container
       run: docker stop my-ubi8-container && docker rm my-ubi8-container

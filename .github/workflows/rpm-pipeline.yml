@@ -36,7 +36,7 @@ jobs:
     - name: Install and Configure Anchore Engine
       run: |
         # Install and configure Anchore Engine
-        docker run -d --name anchore-engine -p 8228:8228 --env ANCHORE_ADMIN_PASSWORD=myadminpass anchore/anchore-engine:v0.9.3
+        docker run -d --name anchore-engine -p 8228:8228 anchore/anchore-engine:v0.9.3
         docker exec anchore-engine anchore-cli system feeds list
 
     - name: Run Anchore Scan

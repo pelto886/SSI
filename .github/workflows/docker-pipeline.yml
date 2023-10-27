@@ -7,6 +7,9 @@ on:
 
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,11 +29,16 @@ jobs:
         
     - name: Scan image
       uses: anchore/scan-action@v3
+      
       with:
         image: redhat/ubi8
         severity-cutoff: critical
         fail-build: false
         output-format: sarif
+    - name: save file
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: ${{ steps.scan.outputs.sarif }}
 
     - name: Save Anchore Scan Results
       run: |

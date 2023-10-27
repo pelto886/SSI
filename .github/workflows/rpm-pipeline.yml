@@ -31,7 +31,7 @@ jobs:
       run: docker exec my-ubi8-container dnf install -y wget
       
     - name: Download RPM package
-      run: docker exec my-ubi8-container wget -O /tmp/package.rpm "https://dl.fedoraproject.org/pub/epel/8/Everything/aarch64/Packages/z/zeromq-4.3.4-3.el8.aarch64.rpm"
+      run: docker exec my-ubi8-container wget -O /tmp/package.rpm "https://download1.rpmfusion.org/free/el/updates/8/x86_64/m/mplayer-1.5-1.el8.x86_64.rpm"
     
     - name: Install RPM package inside the Docker container
       run: docker exec my-ubi8-container rpm -ivh /tmp/package.rpm

@@ -26,7 +26,10 @@ jobs:
 
     - name: Run a Docker container
       run: docker run -i docker.io/redhat/ubi8 /bin/bash
-
+    
+    - name: Install yum (inside the container)
+      run: dnf install -y yum
+      
     - name: Install wget (inside the container)
       run: yum install -y wget
 

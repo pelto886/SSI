@@ -17,7 +17,10 @@ jobs:
       run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 
     - name: Login to Docker Registry
-      run: docker login -u ${{ secrets.QUAY_USER }} -p ${{ secrets.QUAY_PWD }} quay.io
+      with:
+        username: ${{ secrets.QUAY_USER }}
+        password: ${{ secrets.QUAY_PWD }}
+      run: docker login -u $username -p $password quay.io
 
     - name: Pull Red Hat Docker Image
       run: docker pull quay.io/redhat/ubi8

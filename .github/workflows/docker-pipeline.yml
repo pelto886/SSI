@@ -1,10 +1,6 @@
 name: Pull Red Hat Docker Image and scan
 
 on:
-  push:
-    branches:
-      - main
-
   workflow_dispatch:
 
 permissions:
@@ -41,12 +37,11 @@ jobs:
         # Create a results folder if it doesn't exist
         mkdir -p results
 
-        ls -la
         # Generate a filename with the Docker image name and a timestamp
         filename="redhat_ubi8_$(date +'%Y%m%d%H%M%S').txt"
 
         # Save the Anchore scan results to the generated filename
-        echo ${{ steps.scan.outputs.sarif }} results/$filename
+        mv results.sarif results/$filename
 
         # Commit the results to the Git repository
         git config --global user.email "actions@github.com"

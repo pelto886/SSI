@@ -24,21 +24,19 @@ jobs:
       run: docker pull docker.io/redhat/ubi8
         
     - name: Scan image
-      uses: anchore/scan-action@v3
+      run: |
+        docker run --rm -v $PWD:/workdir -w /workdir aquasec/trivy your-docker-image:latest
+        env:
+          TRIVY_NO_PROGRESS: "true"
+        working-directory: ./path-to-your-dockerfile-directory
       
-      with:
-        image: redhat/ubi8
-        severity-cutoff: critical
-        fail-build: false
-        output-format: sarif
-
     - name: Save Anchore Scan Results
       run: |
         # Create a results folder if it doesn't exist
         mkdir -p results
 
         # Generate a filename with the Docker image name and a timestamp
-        filename="redhat_ubi8_$(date +'%Y%m%d%H%M%S').txt"
+        filename="redhat_ubi8_trivy_$(date +'%Y%m%d%H%M%S').txt"
 
         # Save the Anchore scan results to the generated filename
         mv results.sarif results/$filename

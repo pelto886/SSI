@@ -5,13 +5,10 @@ FROM registry.access.redhat.com/ubi8/ubi:latest
 LABEL maintainer="your-email@example.com"
 LABEL description="This image includes the custom RPM package installed."
 
-# Copy the RPM file from your local directory to the container
-COPY ./example-package.rpm /tmp/example-package.rpm
-
-# Install necessary tools, install the RPM, and clean up the local data
-RUN yum install -y /tmp/example-package.rpm && \
-    rm -rf /var/cache/yum && \
-    rm /tmp/example-package.rpm
+# Update the base system and install the MPlayer plugin using dnf
+RUN dnf -y update && \
+    dnf -y install https://download1.rpmfusion.org/free/el/updates/8/x86_64/m/mplayer-1.5-1.el8.x86_64.rpm && \
+    dnf clean all
 
 # Other setup or configuration, if needed, goes here
 

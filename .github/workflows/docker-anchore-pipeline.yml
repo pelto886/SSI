@@ -1,4 +1,4 @@
-name: Pull Red Hat Docker Image and scan
+name: Anchore Red Hat Docker Scan
 
 on:
   workflow_dispatch:

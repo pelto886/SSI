@@ -1,10 +1,6 @@
 name: Pull Red Hat Docker Image and Download RPM
 
 on:
-  push:
-    branches:
-      - main
-
   workflow_dispatch:
 
 jobs:

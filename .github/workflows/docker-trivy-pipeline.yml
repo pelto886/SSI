@@ -17,4 +17,3 @@ jobs:
       - uses: lazy-actions/gitrivy@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          image: redhat/ubi8

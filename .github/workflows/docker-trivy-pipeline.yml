@@ -19,7 +19,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           target_image: ubi8
           trivy_version: latest
-          severity: HIGH,CRITICAL
           vuln_type: os,library
           ignore_unfixed: false
           issue_title: Security Alert

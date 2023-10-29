@@ -23,5 +23,9 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+          output: result.txt
       - name: List files after scan
-        run: ls -la
+        run: |
+          ls -la \
+          cat result.txt
+        

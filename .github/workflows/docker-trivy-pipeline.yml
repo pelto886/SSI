@@ -23,3 +23,5 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+      - name: List files after scan
+        run: ls -la

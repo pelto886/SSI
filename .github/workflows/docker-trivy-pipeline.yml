@@ -14,7 +14,12 @@ jobs:
       - name: Pull Red Hat Docker Image
         run: docker pull docker.io/redhat/ubi8
 
-      - uses: lazy-actions/gitrivy@v3
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          image: ubi8
+          image-ref: 'docker.io/redhat/ubi8'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'

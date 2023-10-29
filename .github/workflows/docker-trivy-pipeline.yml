@@ -1,10 +1,23 @@
-name: Pull Red Hat Docker Image and scan
+name: Trivy Red Hat Docker Image scan
 
 on:
   workflow_dispatch:
 
 permissions:
   contents: write
+
+jobs:
+  scan:
+    name: docker image Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull Red Hat Docker Image
+        run: docker pull docker.io/redhat/ubi8
+
+      - uses: lazy-actions/gitrivy@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          image: docker.io/redhat/ubi8
 
 jobs:
   build:

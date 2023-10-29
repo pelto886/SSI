@@ -17,5 +17,12 @@ jobs:
       - uses: lazy-actions/gitrivy@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          image: ubi8
+          target_image: ubi8
+          trivy_version: latest
+          severity: HIGH,CRITICAL
+          vuln_type: os,library
+          ignore_unfixed: false
+          issue_title: Security Alert
+          issue_label: trivy,vulnerability
+          fail_on_vulnerabilities: false
           

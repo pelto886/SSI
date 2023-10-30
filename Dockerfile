@@ -7,7 +7,7 @@ LABEL description="This image includes the custom RPM package installed."
 
 # Update the base system and install the MPlayer plugin using dnf
 RUN dnf -y update 
-RUN dnf -y install mplayer-1.5-1
+RUN dnf -y install mplayer-1.5-1.el8.x86_64
 RUN dnf clean all
 
 # Other setup or configuration, if needed, goes here

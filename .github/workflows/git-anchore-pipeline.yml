@@ -1,4 +1,4 @@
-name: Achore Github Repo scan
+name: Anchore Github Repo scan
 
 on:
   workflow_dispatch:

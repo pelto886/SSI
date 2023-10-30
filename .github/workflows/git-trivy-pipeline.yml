@@ -1,4 +1,4 @@
-name: Trivy Github Repo scan
+name: Achore Github Repo scan
 
 on:
   workflow_dispatch:

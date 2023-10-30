@@ -1,14 +1,14 @@
 # Use the official Red Hat Universal Base Image (UBI) 8 as the base image
-FROM registry.access.redhat.com/ubi8/ubi:latest
+FROM centos:latest
 
 # Label the image with metadata (optional)
 LABEL maintainer="your-email@example.com"
 LABEL description="This image includes the custom RPM package installed."
 
 # Update the base system and install the MPlayer plugin using dnf
-RUN dnf -y update 
-RUN dnf -y install mplayer
-RUN dnf clean all
+RUN yum update -y 
+RUN yum install -y mplayer
+RUN yum clean all
 
 # Other setup or configuration, if needed, goes here
 

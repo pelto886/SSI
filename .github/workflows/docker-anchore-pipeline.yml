@@ -30,7 +30,7 @@ jobs:
         image: redhat/ubi8
         severity-cutoff: critical
         fail-build: false
-        output-format: sarif
+        output-format: table
 
     - name: Save Anchore Scan Results
       run: |

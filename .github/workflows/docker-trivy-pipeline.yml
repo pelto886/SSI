@@ -20,6 +20,7 @@ jobs:
           image-ref: 'docker.io/redhat/ubi8'
           format: 'table'
           exit-code: '1'
+          scanners: vuln,secret,config
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'

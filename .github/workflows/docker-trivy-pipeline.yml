@@ -25,10 +25,6 @@ jobs:
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
           output: result.txt
-      - name: List files after scan
-        run: |
-          ls -la
-          cat result.txt
 
       - name: Save trivy Scan Results
         run: |

@@ -1,1 +1,57 @@
+name: Trivy Github Repo scan
 
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    name: docker image Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Clone repo
+        run: git clone https://github.com/rs/zerolog.git
+        
+      - name: Run Trivy Scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: 'zerolog'
+          format: 'table'
+          exit-code: '1'
+          scanners: vuln,secret,config
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+          output: result.txt
+
+      - name: Save trivy Scan Results
+        run: |
+          # Create a results folder if it doesn't exist
+          mkdir -p results
+  
+          # Generate a filename with the Docker image name and a timestamp
+          filename="git_zerolog_trivy_vulnSecretConfig_$(date +'%Y%m%d%H%M%S').txt"
+  
+          # Save the Anchore scan results to the generated filename
+          mv result.txt results/$filename
+  
+          # Commit the results to the Git repository
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add results/$filename
+          git commit -m "Add Anchore scan results for redhat/ubi8"
+          git push
+  
+          echo "Results saved as $filename"
+  
+        env:
+          GIT_COMMITTER_NAME: GitHub Actions
+          GIT_COMMITTER_EMAIL: actions@github.com
+        working-directory: ${{ github.workspace }}
+        

@@ -1,4 +1,4 @@
-name: Anchore Red Hat Docker Scan
+name: Anchore Red Hat Tables
 
 on:
   workflow_dispatch:

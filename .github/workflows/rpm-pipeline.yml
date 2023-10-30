@@ -17,17 +17,14 @@ jobs:
     - name: Login
       run: echo "${{ secrets.DOCKER_PWD }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin docker.io
 
-    - name: Pull Red Hat Docker Image
-      run: docker pull docker.io/redhat/ubi8
-    
     - name: Build Docker Image
-      run: docker build -t rh-mplayer:latest .
+      run: docker build -t centos-mplayer:latest .
       working-directory: ./
 
     - name: Scan image
       uses: anchore/scan-action@v3
       with:
-        image: rh-mplayer:latest
+        image: centos-mplayer:latest
         severity-cutoff: critical
         fail-build: false
         output-format: table

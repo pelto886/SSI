@@ -31,7 +31,15 @@ jobs:
         severity-cutoff: critical
         fail-build: false
         output-format: sarif
-
+        
+    - name: Anchore SBOM Action
+      # You may pin to the exact commit or the version.
+      # uses: anchore/sbom-action@78fc58e266e87a38d4194b2137a3d4e9bcaf7ca1
+      uses: anchore/sbom-action@v0.14.3
+      with:
+        image: redhat/ubi8
+        format: spdx-json
+        output-file: sbom.txt
     - name: Save Anchore Scan Results
       run: |
         # Create a results folder if it doesn't exist
@@ -39,14 +47,17 @@ jobs:
 
         # Generate a filename with the Docker image name and a timestamp
         filename="redhat_ubi8_anchore_vuln_$(date +'%Y%m%d%H%M%S').txt"
+        sbomname="redhat_ubi8_sbom_$(date +'%Y%m%d%H%M%S').txt
 
         # Save the Anchore scan results to the generated filename
         mv results.sarif results/$filename
+        mv sbom.txt results/$sbomname
 
         # Commit the results to the Git repository
         git config --global user.email "actions@github.com"
         git config --global user.name "GitHub Actions"
         git add results/$filename
+        git add results/$sbomname
         git commit -m "Add Anchore scan results for redhat/ubi8"
         git push
 

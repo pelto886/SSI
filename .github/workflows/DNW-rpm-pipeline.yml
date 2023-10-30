@@ -1,4 +1,4 @@
-name: RPM anchore scan on Mplayer
+name: (DNW) RPM anchore scan
 
 on:
   workflow_dispatch:

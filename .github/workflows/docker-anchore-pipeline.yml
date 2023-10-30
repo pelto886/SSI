@@ -47,7 +47,7 @@ jobs:
 
         # Generate a filename with the Docker image name and a timestamp
         filename="redhat_ubi8_anchore_vuln_$(date +'%Y%m%d%H%M%S').txt"
-        sbomname="redhat_ubi8_sbom_$(date +'%Y%m%d%H%M%S').txt
+        sbomname="redhat_ubi8_sbom_$(date +'%Y%m%d%H%M%S').txt"
 
         # Save the Anchore scan results to the generated filename
         mv results.sarif results/$filename

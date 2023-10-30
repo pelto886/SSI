@@ -26,6 +26,6 @@ jobs:
           output: result.txt
       - name: List files after scan
         run: |
-          ls -la \
+          ls -la
           cat result.txt
         

@@ -33,7 +33,7 @@ jobs:
           mkdir -p results
   
           # Generate a filename with the Docker image name and a timestamp
-          filename="gi_zerolog_anchore_vuln_$(date +'%Y%m%d%H%M%S').txt"
+          filename="git_zerolog_anchore_vuln_$(date +'%Y%m%d%H%M%S').txt"
   
           # Save the Anchore scan results to the generated filename
           mv results.sarif results/$filename

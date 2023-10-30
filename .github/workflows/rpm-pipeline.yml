@@ -19,23 +19,15 @@ jobs:
 
     - name: Pull Red Hat Docker Image
       run: docker pull docker.io/redhat/ubi8
-
-    - name: Run a Docker container in detached mode
-      run: docker run -d --name my-ubi8-container docker.io/redhat/ubi8 sleep infinity
     
-    - name: Install yum (inside the container)
-      run: docker exec my-ubi8-container dnf install -y wget
-      
-    - name: Download RPM package
-      run: docker exec my-ubi8-container wget -O /tmp/package.rpm "https://download1.rpmfusion.org/free/el/updates/8/x86_64/m/mplayer-1.5-1.el8.x86_64.rpm"
+    - name: Build Docker Image
+      run: docker build -t rh-mplayer:latest .
+      working-directory: ./
 
     - name: Scan image
       uses: anchore/scan-action@v3
       with:
-        image: redhat/ubi8
+        image: rh-mplayer:latest
         severity-cutoff: critical
         fail-build: false
         output-format: table
-    
-    - name: Stop and remove the Docker container
-      run: docker stop my-ubi8-container && docker rm my-ubi8-container

@@ -1,4 +1,4 @@
-name: Pull Red Hat Docker Image and Download RPM
+name: RPM anchore scan on Mplayer
 
 on:
   workflow_dispatch:
